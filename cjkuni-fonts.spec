@@ -19,7 +19,7 @@ the CJK Unifonts project.
 
 Name:        %{fontname}-fonts
 Version:     0.2.20080216.1
-Release:     35%{?dist}
+Release:     36%{?dist}
 Summary:     Chinese Unicode TrueType fonts in Ming and Kai face
 License:     Arphic
 Group:       User Interface/X
@@ -37,6 +37,7 @@ Patch1:     cjkunifonts-0.2.20080216.1-2.patch
 Patch2:     cjkuni-fonts-0.2.20080216.1-18.patch
 Patch3:     cjkuni-fonts-0.2.20080216.1-19.patch
 Patch4:     cjkuni-fonts-uming-use-latin.patch
+Patch5:     cjkuni-fonts-remove-strong-binding.patch
 
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:        noarch
@@ -151,6 +152,7 @@ CJK Unifonts ghostscript files.
 %patch2 -p1 -b .2-rhbz475743
 %patch3 -p1 -b .3-rhbz459680
 %patch4 -p0 -b .4-use-latin
+%patch5 -p1 -b .5-rhbz651651
 %setup -q -c -T -a2 -n %{ukaibuilddir}
 
 %build
@@ -210,6 +212,10 @@ cd -
 %__rm -fr %{buildroot}
 
 %changelog
+* Sat Jun  8 2013 Peng Wu <pwu@redhat.com> - 0.2.20080216.1-36.el6
+- Resolves: rhbz#651651
+- Remove font strong binding from 64-ttf-arphic-uming.conf
+
 * Wed Jun 08 2011  Peng Wu <pwu@redhat.com> - 0.2.20080216.1-35.el6
 - Resolves: rhbz#682650
 - Remove 25-ttf-arphic-uming-bitmaps.conf from cjkuni-uming-fonts.
