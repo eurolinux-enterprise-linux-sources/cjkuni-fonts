@@ -19,7 +19,7 @@ the CJK Unifonts project.
 
 Name:        %{fontname}-fonts
 Version:     0.2.20080216.1
-Release:     34%{?dist}
+Release:     35%{?dist}
 Summary:     Chinese Unicode TrueType fonts in Ming and Kai face
 License:     Arphic
 Group:       User Interface/X
@@ -175,6 +175,8 @@ CJK Unifonts ghostscript files.
 %__install -m 0755 -d %{buildroot}%{_fontconfig_templatedir}
 %__install -m 0755 -d %{buildroot}%{_fontconfig_confdir}
 cd ../%{umingbuilddir}
+#fix rhbz#682650
+rm -f 25-ttf-arphic-uming-bitmaps.conf
 for fconf in `ls *-ttf-arphic-uming*.conf`
 do
     %__install -m 0644 $fconf %{buildroot}%{_fontconfig_templatedir}/
@@ -208,6 +210,10 @@ cd -
 %__rm -fr %{buildroot}
 
 %changelog
+* Wed Jun 08 2011  Peng Wu <pwu@redhat.com> - 0.2.20080216.1-35.el6
+- Resolves: rhbz#682650
+- Remove 25-ttf-arphic-uming-bitmaps.conf from cjkuni-uming-fonts.
+
 * Thu Jan 28 2010 Caius 'kaio' Chance <cchance at redhat.com> - 0.2.20080216.1-34.el6
 - Resolves: rhbz#559452
 - Fix cjkuni-fonts-common shouls obsoletes cjkunifonts-common instead of itself.
